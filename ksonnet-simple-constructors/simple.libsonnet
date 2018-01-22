@@ -15,7 +15,7 @@ local params = {
 local deploymentVersion = params.version;
 
 // container creates a container object
-local container = function(version, name, image, containerPort)
+local container(version, name, image, containerPort) =
   // create a local variable with our resource
   local deployment = k.apps[deploymentVersion].deployment;
 
@@ -29,8 +29,9 @@ local container = function(version, name, image, containerPort)
     .withImage(image)
     .withPorts(port);
 
+
 // createDeployment is our function for creating a deployment
-local createDeployment = function(version, name, containers, podLabels={}, replicas=1)
+local createDeployment(version, name, containers, podLabels={}, replicas=1) =
   // create a local variable with our resource
   local deployment = k.apps[deploymentVersion].deployment;
 
@@ -42,7 +43,7 @@ local createDeployment = function(version, name, containers, podLabels={}, repli
 
 
   deployment
-    .init()
+    .new()
     + metadata
     + spec
     + templateSpec
